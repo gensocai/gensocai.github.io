@@ -13,7 +13,7 @@
     <script>
         async function predict() {
             const data = tf.tensor2d([[parseFloat(document.getElementById('input').value)]]);
-            const model = await tf.loadLayersModel('path/to/model.json');
+            const model = await tf.loadLayersModel('model.json');
             const result = model.predict(data).dataSync()[0];
             document.getElementById('output').textContent = result.toFixed(2);
         }
