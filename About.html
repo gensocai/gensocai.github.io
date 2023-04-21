@@ -6,11 +6,13 @@
 </head>
 <body>
     <h1>My TensorFlow Model</h1>
-    <input type="text" id="input">
+    <input type="file" id="file" accept="image/*">
     <button onclick="predict()">Predict</button>
+    <br>
+    <img id="preview" width="224" height="224">
     <p id="output"></p>
 
-     <script>
+    <script>
         async function predict() {
             const fileInput = document.getElementById('file');
             const file = fileInput.files[0];
@@ -26,7 +28,7 @@
                     const offset = tf.scalar(127.5);
                     const normalized = tensor.sub(offset).div(offset);
                     const batched = normalized.reshape([1, 224, 224, 3]);
-                    const model = await tf.loadLayersModel('path/to/model.json');
+                    const model = await tf.loadLayersModel('model.json');
                     const result = model.predict(batched).dataSync()[0];
                     document.getElementById('output').textContent = result.toFixed(2);
                 };
