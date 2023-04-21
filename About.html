@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My TensorFlow Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.12.0/dist/tf.min.js"></script>
+</head>
+<body>
+    <h1>My TensorFlow Model</h1>
+    <input type="text" id="input">
+    <button onclick="predict()">Predict</button>
+    <p id="output"></p>
+
+    <script>
+        async function predict() {
+            const data = tf.tensor2d([[parseFloat(document.getElementById('input').value)]]);
+            const model = await tf.loadLayersModel('path/to/model.json');
+            const result = model.predict(data).dataSync()[0];
+            document.getElementById('output').textContent = result.toFixed(2);
+        }
+    </script>
+</body>
+</html>
